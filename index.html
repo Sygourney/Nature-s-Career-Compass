@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nature's Career Compass</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Fullscreen video background -->
+  <video autoplay muted loop id="background-video" playsinline>
+    <source src="your-video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <header>
+    <div class="header-flex">
+      <img src="logo.jpeg" alt="Nature's Career Compass Logo" class="logo animated-logo">
+      <div class="header-titles">
+        <h1 class="desktop-header">Nature’s Career Compass – Let Nature Guide Your Career Journey</h1>
+        <h1 class="mobile-header">Guiding Your Green Path</h1>
+      </div>
+    </div>
+  </header>
+    <section id="intro" class="question-box show">
+      <h2>Welcome!</h2>
+      <p>Nature's career compass is here to lead you on your journey to the right career in nature and wildlife for your interests and passions. Let's start your journey!</p>
+      <button id="start-btn">Start Quiz</button>
+    </section>
+
+    <section id="quiz" class="hidden">
+      <div id="question-container"></div>
+      <button id="next-btn" class="hidden">Next</button>
+    </section>
+
+    <section id="result" class="hidden">
+      <h2>Your Nature Career Match</h2>
+      <div id="career-result"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Nature's Career Compass. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

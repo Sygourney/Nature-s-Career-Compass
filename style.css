@@ -1,0 +1,391 @@
+/* Header flex layout for logo and titles */
+.header-flex {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Zorg dat de logo niet zweeft als floating-logo */
+.logo.animated-logo {
+  position: static;
+  width: 110px;
+  margin: 0;
+  transform: rotate(-14deg);
+  transition: transform 0.3s, box-shadow 0.2s;
+}
+footer {
+  text-align: center;
+  display: block;
+  margin-top: auto;
+}
+/* Background video */
+#background-video {
+  position: fixed;
+  right: 0; bottom: 0; top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.6) saturate(0.8);
+}
+
+/* Reset & basics */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f0f0f0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  background: transparent;
+}
+
+header, footer {
+  background-color: rgba(47,111,47, 0.85); /* donkergroen met transparantie */
+  color: white;
+  padding: 10px 20px;
+  position: relative;
+  font-size: 1.2em;
+  flex-wrap: wrap;
+  z-index: 10;
+} 
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(47,111,47, 0.85);
+  box-shadow: 0 4px 24px rgba(56,142,60,0.18);
+  border-radius: 0 0 32px 32px;
+  margin: 0;
+  padding: 18px 0 0 0;
+  min-height: 80px;
+  position: relative;
+  animation: fadeInDown 1.2s cubic-bezier(.77,0,.18,1) both;
+}
+
+.header-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.animated-header {
+  animation: popIn 1.2s 0.2s cubic-bezier(.77,0,.18,1) both;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.1em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(56,142,60,0.18);
+}
+
+.desktop-header {
+  display: inline;
+}
+.mobile-header {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .desktop-header {
+    display: none;
+  }
+  .mobile-header {
+    display: inline;
+  }
+  header h1 {
+    font-size: 1.5em;
+  }
+}
+
+header p {
+  font-size: 1.2em;
+  font-weight: 400;
+  color: #dcdcdc;
+  margin-top: 8px;
+}
+
+/* .logo and other classes follow */
+.logo {
+  width: 70px;
+  height: auto;
+  margin-top: 8px;
+  margin-right: 18px;
+  align-self: flex-end;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(56,142,60,0.18);
+  background: rgba(47,111,47,0.85);
+  padding: 6px;
+  transition: box-shadow 0.2s, transform 0.3s;
+}
+.logo.animated-logo {
+  animation: bounceIn 1.1s 0.7s cubic-bezier(.77,0,.18,1) both;
+}
+.logo:hover {
+  box-shadow: 0 6px 24px #4caf50;
+  transform: scale(1.12) rotate(-8deg);
+}
+.question-box {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  max-width: 600px;
+  margin: 0 auto;
+
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.5s ease;
+}
+
+.question-box.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.question-box.hide {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.question-box h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #b9f6ca;
+  text-shadow: 0 0 5px #000;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button.option {
+  background-color: #4caf50; /* start groen */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.8s ease;
+  user-select: none;
+  outline: none;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+
+button.option:hover {
+  background-color: #2196f3; /* blauw bij hover */
+  transform: scale(1.05);
+}
+
+button.option.selected {
+  animation: colorCycle 3s infinite;
+  font-weight: bold;
+  box-shadow: 0 0 15px #ffd54f;
+}
+
+@keyframes colorCycle {
+  0%   { background-color: #4caf50; }  /* groen */
+  33%  { background-color: #2196f3; }  /* blauw */
+  66%  { background-color: #795548; }  /* bruin */
+  100% { background-color: #4caf50; }  /* terug naar groen */
+}
+
+#next-btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 1.1em;
+  background-color: #795548; /* bruin */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  outline: none;
+}
+
+#next-btn:hover {
+  background-color: #5d4037; /* donkerder bruin */
+}
+
+input#api-key-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+button#save-api-key-btn {
+  background-color: #2f6f2f;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  outline: none;
+}
+
+button#save-api-key-btn:hover {
+  background-color: #1e461e;
+}
+
+.hidden {
+  display: none !important;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9em;
+  text-shadow: 0 0 3px #000;
+}
+
+/* Result box styling & versiering */
+.result-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 3px solid #4caf50;
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 90%;
+  margin: 0 auto;
+  color: #a5d6a7;
+  text-shadow: 0 0 5px #000;
+  position: relative;
+  overflow: visible;
+  animation: popIn 1s ease forwards;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Versiersel (bladeren) animatie rond resultaat */
+.result-box::before {
+  content: "🍃🌿🍂";
+  position: absolute;
+  top: -30px;
+  right: 10px;
+  font-size: 2.5rem;
+  animation: floatLeaves 4s ease-in-out infinite;
+  user-select: none;
+}
+
+@keyframes floatLeaves {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(10deg); }
+}
+
+/* removed duplicate .logo style */
+
+.floating-logo {
+  position: fixed;
+  top: 120px;
+  left: 24px;
+  z-index: 1000;
+  width: 140px;
+  height: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  background: none;
+  border-radius: 50%;
+  padding: 0;
+  transition: box-shadow 0.2s, transform 0.3s;
+}
+.floating-logo:hover {
+  box-shadow: 0 4px 16px #4caf50;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    width: 90px;
+    margin-top: 14px;
+    margin-right: 36px;
+  }
+  header h1 {
+    font-size: 1.3em;
+  }
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(-60px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) translateY(10px);
+  }
+  80% {
+    transform: scale(0.95) translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Floating leaves animation */
+.floating-leaf {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 2.2em;
+  opacity: 0.7;
+  animation: leafFloat 8s linear infinite;
+}
+
+@keyframes leafFloat {
+  0% {
+    transform: translateY(-60px) rotate(-20deg) scale(1);
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(40deg) scale(1.2);
+    opacity: 0.1;
+  }
+}
+
