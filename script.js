@@ -491,98 +491,37 @@ function removeTypingIndicator() {
 }
 
 function generateAIResponse(message) {
-  // Enhanced system context for Suriname-specific career guidance
-  const systemContext = `You are an AI career guidance assistant specialized in nature and environmental careers in Suriname. You MUST answer ALL questions related to nature, environment, wildlife, conservation, education, and careers - even if you need to provide general guidance.
-
-EDUCATION PATHWAY IN SURINAME (explain this step-by-step when asked):
-1. **Secondary Education (MULO/HAVO/VWO)** - Foundation level (ages 12-16/18)
-2. **MBO Level** - Vocational training:
-   - NATIN (Nationaal Instituut voor Technologie) - Offers agriculture, forestry, and environmental technology programs
-   - PTC (Polytechnic College) - Technical and agricultural sciences
-3. **HBO Level** - Higher professional education:
-   - IOL (Institute for Teacher Training) - For environmental education careers
-   - FHR (Faculty of Technological Sciences) at Anton de Kom University
-4. **University (WO) Level**:
-   - Anton de Kom University (ADEK/UNIKOM) - Bachelor's and Master's degrees in environmental science, biology, forestry
-5. **Specialized Training**:
-   - NGO training programs (Conservation International, WWF Guianas)
-   - Professional certifications (STINASU for nature guides)
-
-KEY INSTITUTIONS IN SURINAME:
-- **Anton de Kom University (ADEK)**: Environmental Science, Biology, Forestry (WO level)
-- **NATIN**: Agriculture, Forestry, Environmental Technology (MBO level)
-- **PTC (Polytechnic College)**: Agricultural Sciences, Technical programs (MBO/HBO level)
-- **IOL**: Environmental Education, Teacher Training (HBO level)
-- **STINASU**: Nature guide certifications and eco-tourism training
-- **Conservation Organizations**: Green Heritage Fund, WWF, Conservation International
-
-CAREER PATHS YOU MUST BE ABLE TO DISCUSS:
-- Forest Conservation Officer
-- Wildlife Rehabilitator
-- Environmental Education Coordinator
-- Eco-Tourism Guide/Manager
-- Sustainable Agriculture Specialist
-- Climate Justice Campaigner
-- Mangrove Restoration Specialist
-- Green Business Developer
-- Environmental Journalist
-- Park Ranger
-- Marine Biologist
-- Environmental Consultant
-- Sustainability Coordinator
-- Conservation Scientist
-
-IMPORTANT INSTRUCTIONS:
-- Answer ALL questions about nature, environment, wildlife, and related careers
-- If asked about a specific career, explain: job description, required education pathway (step by step), skills needed, where to work in Suriname
-- If asked about schools, explain the complete educational pathway from secondary to university
-- Be encouraging and provide practical next steps
-- If you don't know something specific about Suriname, provide general guidance and suggest where to find more info
-- Keep responses helpful, informative, and structured with bullet points
-- Use emojis to make responses engaging (🌿 🎓 🌳 🐾 📚 etc.)
-
-You are helpful, knowledgeable, and ALWAYS provide an answer. Never say you can't help with nature/environment questions.`;
-
-  const url = `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`;
+  // Call our secure backend function instead of directly calling Gemini
+  const functionUrl = '/.netlify/functions/chat';
   
-  const payload = {
-    contents: [{
-      parts: [{
-        text: `${systemContext}\n\nUser question: ${message}`
-      }]
-    }]
-  };
-  
-  fetch(url, {
+  fetch(functionUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify({ message: message })
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
   .then(data => {
     removeTypingIndicator();
     
-    let aiResponse = '';
-    
-    // Extract response from Gemini API structure
-    if (data.candidates && data.candidates[0] && 
-        data.candidates[0].content && 
-        data.candidates[0].content.parts && 
-        data.candidates[0].content.parts[0]) {
-      aiResponse = data.candidates[0].content.parts[0].text;
+    if (data.error) {
+      console.error('Backend error:', data.error);
+      const fallbackResponse = getFallbackResponse(message);
+      addChatMessage(fallbackResponse, 'bot');
+      return;
     }
     
-    // Fallback if no response
-    if (!aiResponse) {
-      aiResponse = getFallbackResponse(message);
-    }
-    
+    const aiResponse = data.response || getFallbackResponse(message);
     addChatMessage(aiResponse, 'bot');
   })
   .catch(error => {
-    console.error('AI API Error:', error);
+    console.error('Network error:', error);
     removeTypingIndicator();
     
     // Use fallback response
