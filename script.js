@@ -177,8 +177,15 @@ const careerMatches = [
 let currentQuestionIndex = 0;
 const userAnswers = [];
 
-// No API key in frontend anymore! 🔒
-// The API key is safely stored in Netlify environment variables
+// Gemini API Configuration
+// IMPORTANT: Set up API restrictions in Google Cloud Console!
+// 1. Go to: https://console.cloud.google.com/apis/credentials
+// 2. Click your API key
+// 3. Under "Application restrictions" choose "HTTP referrers"
+// 4. Add: nature-s-career-compass.netlify.app/*
+// 5. Under "API restrictions" select only "Generative Language API"
+const GEMINI_API_KEY = 'YOUR_NEW_API_KEY_HERE'; // Replace with your NEW API key
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 // DOM elements
 const introSection = document.getElementById('intro');
@@ -491,15 +498,45 @@ function removeTypingIndicator() {
 }
 
 function generateAIResponse(message) {
-  // Call our secure backend function instead of directly calling Gemini
-  const functionUrl = '/.netlify/functions/chat';
-  
-  fetch(functionUrl, {
+  // System context for Suriname nature careers
+  const systemContext = `You are an AI career guidance assistant specialized in nature and environmental careers in Suriname. You MUST answer ALL questions related to nature, environment, wildlife, conservation, education, and careers.
+
+EDUCATION PATHWAY IN SURINAME:
+1. Secondary Education (MULO/HAVO/VWO) - Foundation level
+2. MBO Level: NATIN (Agriculture, Forestry, Environmental Technology), PTC (Agricultural Sciences)
+3. HBO Level: IOL (Environmental Education), FHR (Applied Sciences)
+4. University (WO): Anton de Kom University (Environmental Science, Biology, Forestry)
+5. Specialized Training: STINASU (Nature guides), NGO programs (Conservation International, WWF)
+
+KEY INSTITUTIONS:
+- Anton de Kom University (ADEK): Environmental Science, Biology, Forestry
+- NATIN: Agriculture, Forestry, Environmental Technology (MBO)
+- PTC: Agricultural Sciences, Technical programs
+- IOL: Environmental Education (HBO)
+- STINASU: Nature guide certifications
+
+Keep responses helpful, structured, and use emojis (🌿 🎓 🌳).`;
+
+  const payload = {
+    contents: [{
+      parts: [{
+        text: `${systemContext}\n\nUser question: ${message}`
+      }]
+    }],
+    generationConfig: {
+      temperature: 0.7,
+      topK: 40,
+      topP: 0.95,
+      maxOutputTokens: 1024,
+    }
+  };
+
+  fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ message: message })
+    body: JSON.stringify(payload)
   })
   .then(response => {
     if (!response.ok) {
@@ -510,18 +547,26 @@ function generateAIResponse(message) {
   .then(data => {
     removeTypingIndicator();
     
-    if (data.error) {
-      console.error('Backend error:', data.error);
-      const fallbackResponse = getFallbackResponse(message);
-      addChatMessage(fallbackResponse, 'bot');
-      return;
+    let aiResponse = '';
+    
+    // Extract response from Gemini API structure
+    if (data.candidates && 
+        data.candidates[0] && 
+        data.candidates[0].content && 
+        data.candidates[0].content.parts && 
+        data.candidates[0].content.parts[0]) {
+      aiResponse = data.candidates[0].content.parts[0].text;
     }
     
-    const aiResponse = data.response || getFallbackResponse(message);
+    // Use fallback if no response
+    if (!aiResponse) {
+      aiResponse = getFallbackResponse(message);
+    }
+    
     addChatMessage(aiResponse, 'bot');
   })
   .catch(error => {
-    console.error('Network error:', error);
+    console.error('Gemini API Error:', error);
     removeTypingIndicator();
     
     // Use fallback response
