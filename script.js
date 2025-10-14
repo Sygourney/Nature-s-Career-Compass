@@ -178,14 +178,9 @@ let currentQuestionIndex = 0;
 const userAnswers = [];
 
 // Gemini API Configuration
-// IMPORTANT: Set up API restrictions in Google Cloud Console!
-// 1. Go to: https://console.cloud.google.com/apis/credentials
-// 2. Click your API key
-// 3. Under "Application restrictions" choose "HTTP referrers"
-// 4. Add: nature-s-career-compass.netlify.app/*
-// 5. Under "API restrictions" select only "Generative Language API"
-const GEMINI_API_KEY = 'AIzaSyAVhmAyRLOv6Io07jPcGCMnwtqhplBXgBw'; // Replace with your NEW API key
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+// IMPORTANT: Get your API key from https://aistudio.google.com/app/apikey
+const GEMINI_API_KEY = 'AIzaSyCiqYupz_cXCnEuoPhzFmO1x3TCHA_iPds'; // Replace with your API key
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 // DOM elements
 const introSection = document.getElementById('intro');
@@ -999,4 +994,3 @@ I'm ready to help you find your perfect nature career! What would you like to kn
 
 // Initialize the page when loaded
 document.addEventListener('DOMContentLoaded', init);
-
