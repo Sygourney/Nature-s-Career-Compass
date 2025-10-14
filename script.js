@@ -184,7 +184,7 @@ const userAnswers = [];
 // 3. Under "Application restrictions" choose "HTTP referrers"
 // 4. Add: nature-s-career-compass.netlify.app/*
 // 5. Under "API restrictions" select only "Generative Language API"
-const GEMINI_API_KEY = 'YOUR_NEW_API_KEY_HERE'; // Replace with your NEW API key
+const GEMINI_API_KEY = 'AIzaSyAVhmAyRLOv6Io07jPcGCMnwtqhplBXgBw'; // Replace with your NEW API key
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 // DOM elements
@@ -999,3 +999,4 @@ I'm ready to help you find your perfect nature career! What would you like to kn
 
 // Initialize the page when loaded
 document.addEventListener('DOMContentLoaded', init);
+
