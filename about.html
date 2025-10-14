@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us - Nature's Career Compass</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Video Background -->
+  <video autoplay muted loop id="background-video" playsinline>
+    <source src="your-video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Enhanced particles background -->
+  <div class="particles-background"></div>
+  
+  <!-- Cyber grid -->
+  <div class="cyber-grid"></div>
+
+  <header>
+    <div class="header-content">
+      <div class="logo-title-container">
+        <img src="logo.png" alt="Nature's Career Compass Logo" class="logo animated-logo">
+        <div class="header-titles">
+          <h1>Nature's Career Compass</h1>
+          <h2>Let Nature Guide Your Career Journey</h2>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-btn"><i class="fas fa-home"></i> Home</a>
+        <a href="careers.html" class="nav-btn"><i class="fas fa-tree"></i> Explore Careers</a>
+        <a href="about.html" class="nav-btn active"><i class="fas fa-users"></i> About Us</a>
+      </nav>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+  
+  <main class="page-container">
+    <h1 class="page-title">About Our Team</h1>
+    <p class="page-subtitle">Meet the passionate individuals behind Nature's Career Compass who are dedicated to connecting people with meaningful careers in nature conservation and environmental protection.</p>
+    
+    <!-- Group Photo -->
+    <img src="Group-Foto.jpg" alt="Nature's Career Compass Team" class="group-photo">
+    
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="Sephora.png" alt="Sephora Reding" class="member-image">
+        <h3>Sephora Reding</h3>
+        <p class="role">Team Lead</p>
+        <p>Sephora provides leadership and direction for the Nature's Career Compass project, ensuring the vision is realized through effective coordination and strategic planning.</p>
+      </div>
+      
+      <div class="team-member">
+        <img src="Kirti.png" alt="Kirtie Gobiend" class="member-image">
+        <h3>Kirtie Gobiend</h3>
+        <p class="role">Researcher</p>
+        <p>Kirtie is responsible for researching nature-based careers and environmental opportunities, ensuring the quiz provides accurate and relevant career recommendations.</p>
+      </div>
+      
+      <div class="team-member">
+        <img src="Faith.png" alt="Faith Wirjoredjo" class="member-image">
+        <h3>Faith Wirjoredjo</h3>
+        <p class="role">Designer</p>
+        <p>Faith focuses on the visual design and user experience of Nature's Career Compass, creating an engaging and intuitive interface that connects users with nature-inspired careers.</p>
+      </div>
+      
+      <div class="team-member">
+        <img src="Sygourney.png" alt="Sygourney Nelis" class="member-image">
+        <h3>Sygourney Nelis</h3>
+        <p class="role">Website Developer</p>
+        <p>Sygourney is the technical developer behind Nature's Career Compass, implementing the functionality and ensuring the website operates smoothly and effectively.</p>
+      </div>
+      
+      <div class="team-member">
+        <img src="Ielaiza.png" alt="Ielaiza Ellensburg" class="member-image">
+        <h3>Ielaiza Ellensburg</h3>
+        <p class="role">Facilitator & Project Coordinator</p>
+        <p>Ielaiza ensures the smooth operation of Nature's Career Compass, coordinating between team members and stakeholders to bring this vision to life.</p>
+      </div>
+      
+      <div class="team-member">
+        <img src="Anushka.png" alt="Anushka Sonai" class="member-image">
+        <h3>Anushka Sonai</h3>
+        <p class="role">CEO of Creative Techub Caribbean</p>
+        <p class="organization">Creative Techub Caribbean</p>
+        <p>Anushka provides strategic leadership and technological expertise through Creative Techub Caribbean, supporting innovative projects that bridge technology and environmental conservation.</p>
+      </div>
+    </div>
+    
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </main>
+
+  <!-- Enhanced Chatbot -->
+  <button class="chatbot-fab" id="chatbot-fab">
+    <i class="fas fa-robot"></i>
+  </button>
+
+  <div class="chatbot-container" id="chatbot-container">
+    <div class="chatbot-header">
+      <h3><i class="fas fa-brain"></i> AI Career Assistant</h3>
+      <button class="chatbot-toggle" id="chatbot-toggle">
+        <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div class="message bot">
+        Hello! I'm your advanced AI Career Guide. I can help with nature careers, math problems, general questions, and much more. What would you like to explore today?
+      </div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbot-input" placeholder="Ask me anything...">
+      <button id="send-btn">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Nature's Career Compass. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
