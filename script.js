@@ -180,7 +180,8 @@ const userAnswers = [];
 // Gemini API Configuration
 // IMPORTANT: Get your API key from https://aistudio.google.com/app/apikey
 const GEMINI_API_KEY = 'AIzaSyAVhmAyRLOv6Io07jPcGCMnwtqhplBXgBw'; // Replace with your API key
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+const GEMINI_API_URL = 'https://corsproxy.io/?https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+
 
 // DOM elements
 const introSection = document.getElementById('intro');
@@ -994,4 +995,5 @@ I'm ready to help you find your perfect nature career! What would you like to kn
 
 // Initialize the page when loaded
 document.addEventListener('DOMContentLoaded', init);
+
 
